@@ -20,6 +20,126 @@
   <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">   <link rel="icon" type="image/icon" href="images/favicon.ico">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+  /* Ensure the body and HTML take full height and width */
+  html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+  }
+
+  /* Make sure all elements inherit the box-sizing property */
+  *, *::before, *::after {
+    box-sizing: inherit;
+  }
+
+  /* Responsive grid system */
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  .grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  .grid--1x3 > div {
+    flex: 1 1 calc(33.333% - 20px);
+  }
+
+  /* Media queries for smaller screens */
+  @media (max-width: 992px) {
+    .grid--1x3 > div {
+      flex: 1 1 calc(50% - 20px);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .grid--1x3 > div {
+      flex: 1 1 100%;
+    }
+  }
+
+  /* Basic styles for cards */
+  .card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease;
+  }
+
+  .card:hover {
+    transform: translateY(-5px);
+  }
+
+  .card__header {
+    padding: 20px;
+    background-color: #f7f7f7;
+  }
+
+  .card__body {
+    padding: 20px;
+  }
+
+  .plan__name {
+    margin: 0;
+    font-size: 1.5em;
+  }
+
+  .plan__price, .plan__billing-cycle, .plan__description, .badge {
+    display: block;
+    margin: 5px 0;
+  }
+
+  .list--tick {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .list--tick .list__item {
+    padding-left: 20px;
+    position: relative;
+  }
+
+  .list--tick .list__item::before {
+    content: '✔';
+    position: absolute;
+    left: 0;
+    color: green;
+  }
+
+  .btn {
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-align: center;
+    cursor: pointer;
+  }
+
+  .btn--outline {
+    background-color: transparent;
+    border: 2px solid #007bff;
+    color: #007bff;
+  }
+
+  .btn--block {
+    width: 100%;
+  }
+
+  /* Ensure images are responsive */
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+</style>
+
 </head>
 <body class="tire">                    
 
