@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>16-Step Drum Machine</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1a0000;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .drum-machine {
+            background-color: #400000;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(255, 0, 0, 0.3);
+        }
+        h1 {
+            text-align: center;
+            color: #ff4040;
+            margin-bottom: 20px;
+        }
+        .grid-container {
+            display: flex;
+            gap: 10px;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(16, 1fr);
+            grid-gap: 5px;
+        }
+        .step {
+            width: 30px;
+            height: 30px;
+            background-color: #555;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .active {
+            background-color: #ff4040;
+        }
+    </style>
+</head>
+<body>
+    <div class="drum-machine">
+        <h1>16-Step Drum Machine</h1>
+        <div class="grid-container">
+            <div class="grid" id="grid"></div>
+        </div>
+        <button id="playBtn">Play</button>
+    </div>
+    <script>
+        const grid = document.getElementById('grid');
+        const playBtn = document.getElementById('playBtn');
+        const steps = Array(16).fill(false);
+        let isPlaying = false;
+        let currentStep = 0;
+        let interval;
+
+        steps.forEach((_, index) => {
+            const stepDiv = document.createElement('div');
+            stepDiv.classList.add('step');
+            stepDiv.addEventListener('click', () => {
+                steps[index] = !steps[index];
+                stepDiv.classList.toggle('active', steps[index]);
+            });
+            grid.appendChild(stepDiv);
+        });
+
+        playBtn.addEventListener('click', () => {
+            if (isPlaying) {
+                clearInterval(interval);
+                isPlaying = false;
+                playBtn.textContent = 'Play';
+            } else {
+                isPlaying = true;
+                playBtn.textContent = 'Stop';
+                interval = setInterval(() => {
+                    const stepDivs = document.querySelectorAll('.step');
+                    stepDivs[currentStep].style.opacity = 1;
+                    currentStep = (currentStep + 1) % 16;
+                    stepDivs.forEach((div, index) => {
+                        div.style.opacity = steps[index] ? 1 : 0.3;
+                    });
+                }, 500); // Adjust the interval for speed
+            }
+        });
+    </script>
+</body>
+</html>
