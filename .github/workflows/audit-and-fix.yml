@@ -1,0 +1,37 @@
+name: Audit and Fix
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Audit fix
+        run: npm audit fix
+        
+      - name: Run build (optional)
+        run: npm run build
+
+      - name: Commit and push if changes were made
+        run: |
+          git config --global user.name 'Tireni4560'
+          git config --global user.email 'danieladeleye321@gmail.com'
+          git add -A
+          git commit -m "Fix vulnerabilities"
+          git push
+        if: success() && steps.audit.outcome == 'success'
